@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deadline Buddy — Assignment Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Section -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div>
+          <h1>Deadline Buddy</h1>
+          <p class="tagline">my assignment tracker</p>
+        </div>
+      </div>
+      <div class="current-date-badge" id="currentDateBadge">
+        <!-- Injected via JavaScript -->
+      </div>
+    </header>
+
+    <!-- Overview Statistics -->
+    <section class="stats-grid" aria-label="Assignment Statistics">
+      <div class="stat-card stat-total">
+        <div class="stat-info">
+          <span class="stat-label">Total</span>
+          <span class="stat-value" id="totalCount">0</span>
+        </div>
+      </div>
+      <div class="stat-card stat-pending">
+        <div class="stat-info">
+          <span class="stat-label">Pending</span>
+          <span class="stat-value" id="pendingCount">0</span>
+        </div>
+      </div>
+      <div class="stat-card stat-completed">
+        <div class="stat-info">
+          <span class="stat-label">Completed</span>
+          <span class="stat-value" id="completedCount">0</span>
+        </div>
+      </div>
+      <div class="stat-card stat-overdue">
+        <div class="stat-info">
+          <span class="stat-label">Overdue</span>
+          <span class="stat-value" id="overdueCount">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Layout (Form + List) -->
+    <main class="content-layout">
+      <!-- Left Column: Add Assignment Form -->
+      <section class="form-section card-box">
+        <div class="section-header">
+          <h2>Add Assignment</h2>
+          <p class="section-desc">Keep track of your coursework & exams</p>
+        </div>
+
+        <form id="assignmentForm" novalidate>
+          <div class="form-group">
+            <label for="titleInput">Assignment Title <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="titleInput" 
+              placeholder="e.g., Data Structures Lab 3" 
+              autocomplete="off"
+              required
+            >
+            <span class="form-error" id="titleError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="subjectInput">Subject / Course <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="subjectInput" 
+              placeholder="e.g., CS 201 - Algorithms" 
+              autocomplete="off"
+              required
+            >
+            <span class="form-error" id="subjectError"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dateInput">Due Date <span class="required">*</span></label>
+              <input 
+                type="date" 
+                id="dateInput" 
+                required
+              >
+              <span class="form-error" id="dateError"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="priorityInput">Priority <span class="required">*</span></label>
+              <select id="priorityInput" required>
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+              <span class="form-error" id="priorityError"></span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span>Add Assignment</span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Right Column: Assignments Tracker List -->
+      <section class="list-section card-box">
+        <div class="list-header">
+          <div class="list-title-wrap">
+            <h2>Your Assignments</h2>
+            <span class="assignment-counter" id="activeFilterCount">0 shown</span>
+          </div>
+
+          <!-- Filter Navigation Tabs -->
+          <div class="filter-bar" role="tablist" aria-label="Filter assignments">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+              All
+            </button>
+            <button class="filter-btn" data-filter="pending" role="tab" aria-selected="false">
+              Pending
+            </button>
+            <button class="filter-btn" data-filter="completed" role="tab" aria-selected="false">
+              Completed
+            </button>
+            <button class="filter-btn" data-filter="overdue" role="tab" aria-selected="false">
+              Overdue
+            </button>
+          </div>
+        </div>
+
+        <!-- Assignment Cards Container -->
+        <div class="assignments-container" id="assignmentsList" role="region" aria-live="polite">
+          <!-- Dynamically populated by script.js -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-icon" id="emptyIcon">🎯</div>
+          <h3 id="emptyTitle">No assignments found</h3>
+          <p id="emptySubtitle">Add your first assignment using the form on the left to stay organized!</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Made by Aditya | College project</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
